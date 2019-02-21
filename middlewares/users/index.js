@@ -3,7 +3,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 
 mongoose.connect(`${process.env.URL}/${process.env.DB_NAME}`, {
-  useNewUrlParser: true,
+  useNewUrlParser: true
 })
 
 // User model => users collection
@@ -11,7 +11,7 @@ const User = mongoose.model('User', {
   name: String,
   age: Number,
   email: String,
-  birthDate: Date,
+  birthDate: Date
 })
 
 module.exports = {
@@ -21,25 +21,33 @@ module.exports = {
     const users = await User.find({})
     res.send({
       message: 'List of users',
-      users: users,
+      users: users
     })
   },
 
   // ---------------------------------------------------------------------------
   // Create new user
   createNewUser: async (req, res) => {
+    // Way 1
     const newUser = new User({
       name: req.body.name || null,
       age: req.body.age || null,
       email: req.body.email || null,
-      birthdate: req.body.birthdate || null,
+      birthdate: req.body.birthdate || null
     })
+    await newUser.save() // slow process
 
-    await newUser.save()
+    // Way 2
+    // await User.create({
+    //   name: req.body.name || null,
+    //   age: req.body.age || null,
+    //   email: req.body.email || null,
+    //   birthdate: req.body.birthdate || null
+    // })
 
     res.send({
       message: 'Created new user',
-      newUser: newUser,
+      newUser: newUser
     })
   },
 
@@ -51,7 +59,7 @@ module.exports = {
 
     res.send({
       message: 'All users has been deleted',
-      users: users,
+      users: users
     })
   },
 
@@ -66,7 +74,7 @@ module.exports = {
 
     res.send({
       message: 'One user has been deleted',
-      id: id,
+      id: id
     })
   },
 
@@ -92,7 +100,7 @@ module.exports = {
     res.send({
       message: 'One user has been updated',
       id: id,
-      newName: newName,
+      newName: newName
     })
-  },
+  }
 }
