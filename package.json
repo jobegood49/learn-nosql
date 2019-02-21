@@ -1,14 +1,14 @@
 {
-  "name": "no-sql",
+  "name": "learn-nosql",
   "version": "1.0.0",
-  "description": "",
+  "description": "Learn NoSQL",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jonathan Nicolas",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^6.2.0",
